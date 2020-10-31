@@ -8,6 +8,7 @@ class SearchResultContainer extends Component {
     search: "",
     results: [],
     filteredResults: [],
+    isAlphabetical: false,
   };
 
   componentDidMount() {
@@ -29,6 +30,19 @@ class SearchResultContainer extends Component {
       filteredResults: filteredResults,
     });
   };
+  handleSortChange = (event) => {
+      // similar set up to handleInputChange
+
+    const value = event.target.value;
+    // const filteredResults = this.state.results.filter((employee) =>
+    //   employee.name.first.toLowerCase().includes(value.toLowerCase())
+    // );
+    // this.setState({
+    //   search: value,
+    //   filteredResults: filteredResults,
+    // });
+  };
+
 
   render() {
     return (
@@ -50,11 +64,24 @@ class SearchResultContainer extends Component {
           ></input>
         </div>
        
+            {/* move drop down here. */}
+            {/* <th className="col dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Name
+                    </button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a className="dropdown-item" value = false>Normal</a>
+                            <a className="dropdown-item" value = true>Sorted Alphabetical</a>
+                            
+                        </div>
+                  </th> */}
+
+
         <div>
           {this.state.filteredResults.map((employee) => (
             <EmployeeDetail
               image={employee.picture.thumbnail}
-              name={employee.name.first + employee.name.last}
+              name={employee.name.first + ' ' + employee.name.last}
               phone={employee.phone}
               email={employee.email}
               dob={employee.dob.date}
