@@ -30,18 +30,25 @@ class SearchResultContainer extends Component {
       filteredResults: filteredResults,
     });
   };
-  handleSortChange = (event) => {
-      // similar set up to handleInputChange
-
+  
+  sortEmployeeNames = (event) => {
     const value = event.target.value;
-    // const filteredResults = this.state.results.filter((employee) =>
-    //   employee.name.first.toLowerCase().includes(value.toLowerCase())
-    // );
-    // this.setState({
-    //   search: value,
-    //   filteredResults: filteredResults,
-    // });
-  };
+    const filteredResults = this.state.results.sort(function(a, b) {
+      var nameA = a.name.first.toUpperCase();
+      var nameB = b.name.first.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0
+    })
+    this.setState({
+      search: value,
+      filteredResults: filteredResults,
+    });
+  }
 
 
   render() {
@@ -64,17 +71,10 @@ class SearchResultContainer extends Component {
           ></input>
         </div>
        
-            {/* move drop down here. */}
-            {/* <th className="col dropdown">
-                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Name
-                    </button>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a className="dropdown-item" value = false>Normal</a>
-                            <a className="dropdown-item" value = true>Sorted Alphabetical</a>
-                            
-                        </div>
-                  </th> */}
+        <button type="button" class="btn btn-primary"
+        onClick={this.sortEmployeeNames}>
+          Sort Alphabetically by First Name
+        </button>
 
 
         <div>
